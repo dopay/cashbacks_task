@@ -1,0 +1,20 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @account %>
+
+<div id="payments">
+  <% @account.payments.each do |payment| %>
+    <%= render payment %>
+    <p>
+      <%= link_to "Show this payment", payment %>
+    </p>
+  <% end %>
+  <%= link_to 'Create new payment', new_user_payment_path(@user) %>
+</div>
+
+<div>
+  <%= link_to "Edit this account", edit_user_account_path(@user, @account) %> |
+  <%= link_to "Back to user", user_path(@user) %>
+
+  <%= button_to "Destroy this account", [@user, @account], method: :delete %>
+</div>

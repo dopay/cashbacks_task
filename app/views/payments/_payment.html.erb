@@ -1,0 +1,17 @@
+<div id="<%= dom_id payment %>">
+  <p>
+    <strong>Source account:</strong>
+    <%= payment.source_account.name %>
+  </p>
+
+  <p>
+    <strong>Destination account:</strong>
+    <%= "#{payment.destination_account.user.email}, #{payment.destination_account.name}" %>
+  </p>
+
+  <p>
+    <strong>Amount:</strong>
+    <%= payment.amount %>
+  </p>
+
+</div>

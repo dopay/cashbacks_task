@@ -1,0 +1,25 @@
+AllCops:
+  NewCops: enable
+
+Metrics/PerceivedComplexity:
+  Exclude:
+    - 'bin/*'
+
+Metrics/MethodLength:
+  Exclude:
+    - 'bin/*'
+
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - 'bin/*'
+
+Layout/LineLength:
+  Exclude:
+    - 'bin/*'
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'

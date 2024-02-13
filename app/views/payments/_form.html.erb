@@ -1,0 +1,32 @@
+<%= form_with(model: [user, payment]) do |form| %>
+  <% if payment.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(payment.errors.count, "error") %> prohibited this payment from being saved:</h2>
+
+      <ul>
+        <% payment.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :source_account, style: "display: block" %>
+    <%= form.select :source_account_id, @user.accounts.collect { |a| [ "#{a.name}: #{a.amount}", a.id ] } %>
+  </div>
+
+  <div>
+    <%= form.label :destination_account, style: "display: block" %>
+    <%= form.select :destination_account_id, Account.where.not(user_id: @user.id).collect { |a| ["#{a.user.email}, #{a.name}", a.id] } %>
+  </div>
+
+  <div>
+    <%= form.label :amount, style: "display: block" %>
+    <%= form.text_field :amount %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
