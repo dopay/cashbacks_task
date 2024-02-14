@@ -17,7 +17,7 @@ class PaymentsController < ApplicationController
       return nil
     end
 
-    unless destination_account.update(amount: destination_account.amount - @payment.amount)
+    unless destination_account.update(amount: destination_account.amount + @payment.amount)
       @payment.errors.add :base, "Can't update destination account balance"
       render :new, status: :unprocessable_entity
       return nil
