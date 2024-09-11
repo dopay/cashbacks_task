@@ -2,31 +2,18 @@
 
 ### Welcome to pair programming test task!
 
+This is a simply dummy application that simulates the ability to make payments between accounts. Before you get started, have a look around and get yourself comfortable with the codebase.
 
+**The Task!**
 
-Your task is to add the ability to create cashback for payments. Every time a payment is made, you should transfer 5 percent to the account of the client named "Cashback." If the client does not have such an account yet, it should be created automatically.
+1) Create cashback for payments.
 
-### Stack:
+Every time a payment is made, you should transfer 5 percent to the account of the client named "Cashback." If the client does not have such an account yet, it should be created automatically.
 
-* Ruby 3.2.2
+3) Code improvement
 
-* Rails 7.0.8
+Are there any other improvements that you would recommend making in the codebase whilst completing the first task? Go ahead and make them, explaining what you did and why in the commit message.
+   
+2) Feature expanision
 
-* PostgreSQL 9.3 and later
-
-
-### How to start:
-
-````
-git clone git@github.com:pavlodopay/cashbacks_task.git
-
-cd cashbacks_task
-
-cp config/database.yml.example config/database.yml
-
-bundle install
-
-rails db:create db:migrate db:seed
-
-rails s
-````
+What other features would you add to this solution if you were working on it? Again, go ahead and add a simple feature or two and explain what they do in the commit message.
