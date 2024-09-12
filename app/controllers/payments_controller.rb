@@ -17,23 +17,15 @@ class PaymentsController < ApplicationController
       return nil
     end
 
-    unless destination_account.update(amount: destination_account.amount + @payment.amount)
-      @payment.errors.add :base, "Can't update destination account balance"
-      render :new, status: :unprocessable_entity
-      return nil
+    ActiveRecord::Base.transaction do
+      update_account_balances
+      process_cashback
+      @payment.save!
     end
 
-    unless source_account.update(amount: source_account.amount - @payment.amount)
-      @payment.errors.add :base, "Can't update source account balance"
-      render :new, status: :unprocessable_entity
-      return nil
-    end
-
-    if @payment.save
-      redirect_to user_account_path(@user, source_account)
-    else
-      render :new, status: :unprocessable_entity
-    end
+    redirect_to user_account_path(@user, source_account), notice: 'Payment was successfully created.'
+  rescue ActiveRecord::RecordInvalid
+    render :new, status: :unprocessable_entity
   end
 
   private
@@ -56,5 +48,16 @@ class PaymentsController < ApplicationController
 
   def destination_account
     @destination_account ||= Account.find payment_params[:destination_account_id]
+  end
+
+  def update_account_balances
+    source_account.update!(amount: source_account.amount - @payment.amount)
+    destination_account.update!(amount: destination_account.amount + @payment.amount)
+  end
+
+  def process_cashback
+    cashback_amount = @payment.amount * 0.05
+    cashback_account = @user.accounts.cashback.first_or_create!(name: 'Cashback', amount: 0, cashback: true)
+    cashback_account.update!(amount: cashback_account.amount + cashback_amount)
   end
 end

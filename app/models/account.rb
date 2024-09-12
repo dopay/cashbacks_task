@@ -7,4 +7,6 @@ class Account < ApplicationRecord
 
   validates :name, :amount, presence: true
   validates :name, uniqueness: { scope: :user }
+
+  scope :cashback, -> { where(cashback: true) }
 end

@@ -1,3 +1,31 @@
+# Cash Back Feature
+
+I've implemented a cashback feature that automatically rewards users with 5% of their transaction amount for each payment made. This feature involved several changes to the existing codebase:
+
+### Database Changes
+
+I added a `cashback` boolean column to the `accounts` table. This new column allows distinguishing cashback accounts from regular accounts.
+
+### Model Updates
+
+I updated the `Account` model to include a scope for cashback accounts. This scope provides an easy way to query for cashback accounts.
+
+### Controller Logic
+
+I modified the `PaymentsController` to handle the cashback logic. Key changes in the controller include:
+- Wrapping the payment creation process in a transaction to ensure data integrity.
+- Adding a `process_cashback` method that:
+  - Calculates the cashback amount (5% of the payment amount).
+  - Finds or creates a cashback account for the user.
+  - Updates the cashback account balance.
+
+### Feature Behavior
+
+- For each payment made, 5% of the transaction amount is automatically calculated as cashback.
+- If the user doesn't have a cashback account, one is automatically created.
+- The cashback amount is added to the user's cashback account balance.
+- All these operations are performed within a single database transaction to ensure consistency.
+
 # Feature Expansions and Improvements
 
 ## Dockerization of the Application
