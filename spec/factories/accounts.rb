@@ -6,5 +6,11 @@ FactoryBot.define do
 
     name { 'MyString' }
     amount { '9.99' }
+    cashback { false }
+
+    trait :cashback do
+      name { 'Cashback' }
+      cashback { true }
+    end
   end
 end

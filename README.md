@@ -26,6 +26,13 @@ I modified the `PaymentsController` to handle the cashback logic. Key changes in
 - The cashback amount is added to the user's cashback account balance.
 - All these operations are performed within a single database transaction to ensure consistency.
 
+# Unit Tests
+
+- Updated the account factory to include a cashback trait.
+- Modified the account model spec to test the new cashback scope and validations.
+- Created the payments request spec to include cashback-related scenarios.
+These updates provide comprehensive test coverage for the new cashback functionality, ensuring that the feature works as expected and maintains the integrity of our application.
+
 # Feature Expansions and Improvements
 
 ## Dockerization of the Application
