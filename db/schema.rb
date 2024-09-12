@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_09_12_131926) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_12_135012) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,6 +23,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_12_131926) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "cashback", default: false
+    t.index ["cashback"], name: "index_accounts_on_cashback"
     t.index ["user_id"], name: "index_accounts_on_user_id"
   end
 

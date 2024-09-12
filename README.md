@@ -47,6 +47,16 @@ By wrapping the payment creation process in a transaction, we ensure data integr
 
  Adding validations to the Payment model helps ensure that our data remains consistent and valid.
 
+ ## Add Cash back Index
+
+This index will be particularly useful in scenarios like:
+
+- When listing all cashback accounts for a user
+- When checking if a user has a cashback account
+- When filtering accounts to show only cashback or non-cashback accounts
+
+It's a small change, but it can have a noticeable impact on performance, especially as the number of accounts in the system grows.
+
 ## Dockerization of the Application
 
 We have expanded the project to include a complete Docker setup, making it easier to develop, test, and deploy the application consistently across different environments. This feature includes:
