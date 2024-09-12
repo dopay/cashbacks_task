@@ -1,19 +1,34 @@
-# README
+# Feature Expansions and Improvements
 
-### Welcome to pair programming test task!
+## Dockerization of the Application
 
-This is a simply dummy application that simulates the ability to make payments between accounts. Before you get started, have a look around and get yourself comfortable with the codebase.
+We have expanded the project to include a complete Docker setup, making it easier to develop, test, and deploy the application consistently across different environments. This feature includes:
 
-**The Task!**
+- A `Dockerfile` for building the application image
+- A `docker-compose.yml` file for orchestrating the application services
+- A `start.sh` script for automating database setup and application startup
 
-1) Create cashback for payments.
+### Key Benefits:
 
-Every time a payment is made, you should transfer 5 percent to the account of the client named "Cashback." If the client does not have such an account yet, it should be created automatically.
+1. **Consistent Development Environment**: Ensures all developers work with the same setup, regardless of their local machine configuration.
 
-3) Code improvement
+2. **Easy Setup**: New team members can get the application running with just a few commands, without needing to install dependencies manually.
 
-Are there any other improvements that you would recommend making in the codebase whilst completing the first task? Go ahead and make them, explaining what you did and why in the commit message.
-   
-2) Feature expanision
+3. **Automated Database Management**: The start script automatically sets up, migrates, and seeds the development and test databases.
 
-What other features would you add to this solution if you were working on it? Again, go ahead and add a simple feature or two and explain what they do in the commit message.
+4. **Integrated Services**: Includes PostgreSQL and Redis services, configured and ready to use.
+
+5. **Production-like Environment**: The dockerized setup closely mimics the production environment, reducing "it works on my machine" issues.
+
+### Usage:
+
+To use the dockerized setup:
+
+1. Ensure Docker and Docker Compose are installed on your machine.
+2. Clone the repository.
+3. Run `docker-compose build` to build the Docker images.
+4. Run `docker-compose up` to start the application.
+
+The application will be available at `http://localhost:3000`.
+
+This dockerization feature significantly improves the development workflow and sets the stage for easier deployment and scaling in the future.
