@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :transaction do
-    account { nil }
+    account
     amount { "9.99" }
-    transaction_type { "MyString" }
+    transaction_type { %w[credit debit].sample }
     description { "MyText" }
   end
 end

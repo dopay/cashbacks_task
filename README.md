@@ -26,7 +26,7 @@ I modified the `PaymentsController` to handle the cashback logic. Key changes in
 - The cashback amount is added to the user's cashback account balance.
 - All these operations are performed within a single database transaction to ensure consistency.
 
-# Unit Tests
+## Unit Tests
 
 - Updated the account factory to include a cashback trait.
 - Modified the account model spec to test the new cashback scope and validations.
@@ -125,3 +125,9 @@ I have implemented a new Transaction History feature that allows users to view a
 3. **Easier Reconciliation**: With a comprehensive transaction history, it's easier for users to reconcile their accounts and spot any discrepancies.
 
 This new feature significantly enhances the functionality of our banking application, providing users with more detailed insights into their account activities.
+
+## Unit Tests
+
+- The account factory has been updated to support the new Transaction History feature.
+- A new :with_transactions trait has been added to the account factory, allowing for easy creation of accounts with associated transactions in tests.
+
