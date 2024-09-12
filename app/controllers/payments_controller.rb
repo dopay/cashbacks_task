@@ -2,40 +2,27 @@
 
 class PaymentsController < ApplicationController
   before_action :load_user
-  before_action :load_payment, only: %i[show edit update destroy]
 
   def new
     @payment = Payment.new
   end
 
   def create
-    @payment = Payment.new payment_params
+    service = PaymentService.new(payment_params, @user)
 
-    if source_account.amount < @payment.amount
-      @payment.errors.add :amount, "Can't be more than source account amount"
+    if service.process
+      redirect_to user_account_path(@user, source_account), notice: 'Payment was successfully created.'
+    else
+      @payment = Payment.new(payment_params)
+      @payment.valid? # Trigger validations to show errors
       render :new, status: :unprocessable_entity
-      return nil
     end
-
-    ActiveRecord::Base.transaction do
-      update_account_balances
-      process_cashback
-      @payment.save!
-    end
-
-    redirect_to user_account_path(@user, source_account), notice: 'Payment was successfully created.'
-  rescue ActiveRecord::RecordInvalid
-    render :new, status: :unprocessable_entity
   end
 
   private
 
   def load_user
-    @user = User.find params[:user_id]
-  end
-
-  def load_payment
-    @payment = Payment.find(params[:id])
+    @user = User.find(params[:user_id])
   end
 
   def payment_params
@@ -43,21 +30,6 @@ class PaymentsController < ApplicationController
   end
 
   def source_account
-    @source_account ||= Account.find payment_params[:source_account_id]
-  end
-
-  def destination_account
-    @destination_account ||= Account.find payment_params[:destination_account_id]
-  end
-
-  def update_account_balances
-    source_account.update!(amount: source_account.amount - @payment.amount)
-    destination_account.update!(amount: destination_account.amount + @payment.amount)
-  end
-
-  def process_cashback
-    cashback_amount = @payment.amount * 0.05
-    cashback_account = @user.accounts.cashback.first_or_create!(name: 'Cashback', amount: 0, cashback: true)
-    cashback_account.update!(amount: cashback_account.amount + cashback_amount)
+    @source_account ||= Account.find(payment_params[:source_account_id])
   end
 end

@@ -35,6 +35,18 @@ These updates provide comprehensive test coverage for the new cashback functiona
 
 # Feature Expansions and Improvements
 
+## Use Transaction
+
+By wrapping the payment creation process in a transaction, we ensure data integrity.
+
+## Code organization and maintainability
+
+ By introducing the PaymentService, we've separated concerns and made the codebase more modular.
+
+ ## Data integrity
+
+ Adding validations to the Payment model helps ensure that our data remains consistent and valid.
+
 ## Dockerization of the Application
 
 We have expanded the project to include a complete Docker setup, making it easier to develop, test, and deploy the application consistently across different environments. This feature includes:
