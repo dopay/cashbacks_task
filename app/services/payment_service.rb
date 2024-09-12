@@ -13,6 +13,7 @@ class PaymentService
       ActiveRecord::Base.transaction do
         update_account_balances
         process_cashback
+        create_transactions
         @payment.save!
       end
   
@@ -44,5 +45,19 @@ class PaymentService
   
     def destination_account
       @destination_account ||= Account.find(@payment_params[:destination_account_id])
+    end
+
+    def create_transactions
+      source_account.transactions.create!(
+        amount: @payment.amount,
+        transaction_type: 'debit',
+        description: "Payment to #{destination_account.name}"
+      )
+  
+      destination_account.transactions.create!(
+        amount: @payment.amount,
+        transaction_type: 'credit',
+        description: "Payment from #{source_account.name}"
+      )
     end
   end

@@ -89,3 +89,39 @@ To use the dockerized setup:
 The application will be available at `http://localhost:3000`.
 
 This dockerization feature significantly improves the development workflow and sets the stage for easier deployment and scaling in the future.
+
+# Added Features
+
+## Transaction History
+
+I have implemented a new Transaction History feature that allows users to view a detailed log of all activities on their accounts. This feature enhances transparency and aids in financial tracking and reconciliation.
+
+### Key Components:
+
+1. **Transaction Model**: A new `Transaction` model has been added to store individual transaction records. Each transaction is associated with an account and includes details such as amount, transaction type (credit/debit), and description.
+
+2. **Account Model Update**: The `Account` model has been updated to include a `has_many :transactions` association.
+
+3. **Transactions Controller**: A new `TransactionsController` has been implemented to handle the display of transaction history for each account.
+
+4. **Payments Controller Update**: The `PaymentsController` has been modified to automatically create transaction records when a payment is made.
+
+5. **Transaction History View**: A new view has been added to display the transaction history in a tabular format, showing date, type, amount, and description for each transaction.
+
+6. **Routing**: New routes have been added to support the transaction history feature.
+
+### Feature Behavior:
+
+- When a payment is made, two transaction records are automatically created:
+  - A 'debit' transaction for the source account
+  - A 'credit' transaction for the destination account
+- Users can view the transaction history for each of their accounts
+- Transactions are displayed in reverse chronological order (newest first)
+
+### Benefits:
+
+1. **Improved Transparency**: Users can now see a complete history of all transactions for each account.
+2. **Better Financial Tracking**: The detailed transaction log helps users keep track of their financial activities more effectively.
+3. **Easier Reconciliation**: With a comprehensive transaction history, it's easier for users to reconcile their accounts and spot any discrepancies.
+
+This new feature significantly enhances the functionality of our banking application, providing users with more detailed insights into their account activities.
