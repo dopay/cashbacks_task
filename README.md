@@ -128,6 +128,7 @@ This new feature significantly enhances the functionality of our banking applica
 
 ## Unit Tests
 
+- The transaction factory is created to ease the data preparation in specs.
 - The account factory has been updated to support the new Transaction History feature.
 - A new :with_transactions trait has been added to the account factory, allowing for easy creation of accounts with associated transactions in tests.
 
