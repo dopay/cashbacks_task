@@ -1,0 +1,11 @@
+<h1>Cashback Earned!</h1>
+
+<p>Dear <%= @user.name %>,</p>
+
+<p>Great news! You've earned cashback on your recent transaction.</p>
+
+<p>Cashback Amount: <%= number_to_currency(@cashback_amount) %></p>
+
+<p>This amount has been added to your Cashback account. You can use this cashback for future transactions or withdraw it at any time.</p>
+
+<p>Thank you for your continued business!</p>

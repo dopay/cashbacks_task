@@ -132,3 +132,32 @@ This new feature significantly enhances the functionality of our banking applica
 - The account factory has been updated to support the new Transaction History feature.
 - A new :with_transactions trait has been added to the account factory, allowing for easy creation of accounts with associated transactions in tests.
 
+## Email Notifications (From our Interview :) 
+
+I have implemented an email notification system to keep users informed about their account activities. This feature enhances user experience and provides important updates in real-time.
+
+### Key Components:
+
+1. **Email Service**: A new `EmailService` class has been added to handle various types of email notifications.
+2. **Mailer Class**: A `UserMailer` class has been implemented to define different email templates and logic.
+3. **Email Templates**: HTML templates for different types of emails (payment confirmation, low balance alert, cashback notification) have been created.
+
+### Email Types:
+
+- **Payment Confirmation**: Sent after a successful payment transaction.
+- **Low Balance Alert**: Triggered when an account balance falls below a certain threshold.
+- **Cashback Notification**: Sent when a user earns cashback from a transaction.
+
+### Technical Implementation:
+
+- **Development Environment**: I used the `letter_opener` gem for testing emails. This gem opens emails in the browser instead of actually sending them, making it easy to preview and debug email content.
+
+- **Production Environment**: For production, I'd have configured the application to use SMTP for sending emails. This ensures reliable delivery of transactional emails in the live environment.
+
+### Benefits:
+
+1. **Improved Communication**: Users receive timely updates about their account activities.
+2. **Enhanced Security**: Email notifications for important account actions help users stay informed about their account status.
+3. **Better User Engagement**: Regular notifications keep users engaged with the application.
+
+This email notification system significantly enhances the functionality of our banking application, providing users with more detailed and timely information about their account activities.
