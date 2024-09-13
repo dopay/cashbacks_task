@@ -1,0 +1,9 @@
+<h1>Low Balance Alert</h1>
+
+<p>Dear <%= @user.name %>,</p>
+
+<p>This is to inform you that your account "<%= @account.name %>" has a low balance.</p>
+
+<p>Current Balance: <%= number_to_currency(@account.amount) %></p>
+
+<p>Please consider adding funds to your account to ensure uninterrupted service.</p>

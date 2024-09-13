@@ -12,35 +12,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_240_202_111_126) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_12_141327) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension 'plpgsql'
+  enable_extension "plpgsql"
 
-  create_table 'accounts', force: :cascade do |t|
-    t.string 'name', null: false
-    t.decimal 'amount', default: '0.0', null: false
-    t.bigint 'user_id'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.index ['user_id'], name: 'index_accounts_on_user_id'
+  create_table "accounts", force: :cascade do |t|
+    t.string "name", null: false
+    t.decimal "amount", default: "0.0", null: false
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "cashback", default: false
+    t.index ["cashback"], name: "index_accounts_on_cashback"
+    t.index ["user_id"], name: "index_accounts_on_user_id"
   end
 
-  create_table 'payments', force: :cascade do |t|
-    t.decimal 'amount'
-    t.bigint 'source_account_id'
-    t.bigint 'destination_account_id'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.index ['destination_account_id'], name: 'index_payments_on_destination_account_id'
-    t.index ['source_account_id'], name: 'index_payments_on_source_account_id'
+  create_table "payments", force: :cascade do |t|
+    t.decimal "amount"
+    t.bigint "source_account_id"
+    t.bigint "destination_account_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["destination_account_id"], name: "index_payments_on_destination_account_id"
+    t.index ["source_account_id"], name: "index_payments_on_source_account_id"
   end
 
-  create_table 'users', force: :cascade do |t|
-    t.string 'email', null: false
-    t.string 'name', null: false
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
+  create_table "transactions", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.decimal "amount", null: false
+    t.string "transaction_type", null: false
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_transactions_on_account_id"
   end
 
-  add_foreign_key 'accounts', 'users'
+  create_table "users", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "accounts", "users"
+  add_foreign_key "transactions", "accounts"
 end
